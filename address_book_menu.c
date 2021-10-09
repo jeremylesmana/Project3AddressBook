@@ -14,7 +14,7 @@ int get_option(int type, const char *msg)
 	 * Mutilfuction user intractions like
 	 * Just an enter key detection
 	 * Read an number
-	 * Read a charcter
+	 * Read a character
 	 */ 
 
 	/* Fill the code to add above functionality */
@@ -105,7 +105,7 @@ Status menu(AddressBook *address_book)
 		switch (option)
 		{
 			case e_add_contact:
-				/* Add your implementation to call add_contacts function here */
+				add_contacts(address_book);
 				break;
 			case e_search_contact:
 				search_contact(address_book);
@@ -132,7 +132,17 @@ Status menu(AddressBook *address_book)
 
 Status add_contacts(AddressBook *address_book)
 {
-	/* Add the functionality for adding contacts here */
+	printf("0. Back");
+	return;
+	
+	printf("1. Name : ");
+	scanf("%s", address_book->list->name );
+
+	printf("2. Phone No 1 : ");
+	scanf("%s", address_book->list->phone_numbers);
+
+	printf("3. Email ID 1 : ");
+	scanf("%s", address_book->list->email_addresses);
 }
 
 Status search(const char *str, AddressBook *address_book, int loop_count, int field, const char *msg, Modes mode)
