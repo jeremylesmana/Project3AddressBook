@@ -10,12 +10,13 @@
 
 int get_option(int type, const char *msg)
 {
+	scanf("%d", msg);
 	/*
 	 * Mutilfuction user intractions like
 	 * Just an enter key detection
 	 * Read an number
 	 * Read a character
-	 */ 
+	 */
 
 	/* Fill the code to add above functionality */
 }
@@ -50,7 +51,7 @@ Status list_contacts(AddressBook *address_book, const char *title, int *index, c
 	 * Add code to list all the contacts availabe in address_book.csv file
 	 * Should be menu based
 	 * The menu provide navigation option if the entries increase the page size
-	 */ 
+	 */
 
 	return e_success;
 }
@@ -95,7 +96,7 @@ Status menu(AddressBook *address_book)
 
 		option = get_option(NUM, "");
 
-		if ((address_book-> count == 0) && (option != e_add_contact))
+		if ((address_book->count == 0) && (option != e_add_contact))
 		{
 			get_option(NONE, "No entries found!!. Would you like to add? Use Add Contacts");
 
@@ -104,26 +105,26 @@ Status menu(AddressBook *address_book)
 
 		switch (option)
 		{
-			case e_add_contact:
-				add_contacts(address_book);
-				break;
-			case e_search_contact:
-				search_contact(address_book);
-				break;
-			case e_edit_contact:
-				edit_contact(address_book);
-				break;
-			case e_delete_contact:
-				delete_contact(address_book);
-				break;
-			case e_list_contacts:
-				break;
-				/* Add your implementation to call list_contacts function here */
-			case e_save:
-				save_file(address_book);
-				break;
-			case e_exit:
-				break;
+		case e_add_contact:
+			add_contacts(address_book);
+			break;
+		case e_search_contact:
+			search_contact(address_book);
+			break;
+		case e_edit_contact:
+			edit_contact(address_book);
+			break;
+		case e_delete_contact:
+			delete_contact(address_book);
+			break;
+		case e_list_contacts:
+			break;
+			/* Add your implementation to call list_contacts function here */
+		case e_save:
+			save_file(address_book);
+			break;
+		case e_exit:
+			break;
 		}
 	} while (option != e_exit);
 
@@ -132,17 +133,42 @@ Status menu(AddressBook *address_book)
 
 Status add_contacts(AddressBook *address_book)
 {
-	printf("0. Back");
-	return;
-	
-	printf("1. Name : ");
-	scanf("%s", address_book->list->name );
+	int option;
+	do
+	{
+		main_menu();
+		option = get_option(NUM, "");
 
-	printf("2. Phone No 1 : ");
-	scanf("%s", address_book->list->phone_numbers);
+		switch (option)
+		{
+		case 1:
+			printf("1. Name : ");
+			scanf("%s", address_book->list->name);
+			if (){}
+				//validate and add name
+				break;
+		case 2:
+			printf("2. Phone No 1 : ");
+			scanf("%s", address_book->list->phone_numbers);
+			if(){}
+			//validate and add phone num
+				break;
 
-	printf("3. Email ID 1 : ");
-	scanf("%s", address_book->list->email_addresses);
+		case 3: 
+			printf("3. Email ID 1 : ");
+			scanf("%s", address_book->list->email_addresses);
+			if(){}
+			//validate and add email address
+		
+		case 0:
+			printf("0. Back");
+			break;
+
+		default:
+			break;
+		}
+	} while(option != e_exit);
+	return e_success;
 }
 
 Status search(const char *str, AddressBook *address_book, int loop_count, int field, const char *msg, Modes mode)
