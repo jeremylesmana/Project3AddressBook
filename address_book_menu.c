@@ -142,7 +142,37 @@ Status search(const char *str, AddressBook *address_book, int loop_count, int fi
 
 Status search_contact(AddressBook *address_book)
 {
-	/* Add the functionality for search contacts here */
+	int selection;
+	do {
+		menu_header("Search Contact to Edit by:");
+		printf("0. Back\n");
+		printf("1. Name\n");
+		printf("2. Phone No\n");
+		printf("3. Email ID\n");
+		printf("4. Serial No\n");
+		
+		printf("Please select an option: ");
+		scanf("%d", selection);
+
+		
+		switch (selection) {
+			case 0:
+				menu(&address_book);
+				break;
+			case 1:
+					char nameInput[32];
+					printf("Enter the name: ");
+					scanf("%s", nameInput);
+
+					const ContactInfo endPtr = *address_book + tableSize;
+					for(; address_book < endPtr; address_book++) //search until end of table ptr++ will increment by one
+					{
+						if(address_book->name == nameInput)//check if it equals the employee number
+							return (ContactInfo) address_book;
+					}
+					return e_no_match;
+		}
+	} while (selection != 0);
 }
 
 Status edit_contact(AddressBook *address_book)
