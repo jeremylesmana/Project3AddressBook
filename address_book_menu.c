@@ -50,7 +50,46 @@ Status list_contacts(AddressBook *address_book, const char *title, int *index, c
 	 * Should be menu based
 	 * The menu provide navigation option if the entries increase the page size
 	 */ 
+	char buffer[32];
+	int row=0, column = 0;
+	menu_header(title);
+	
+	printf("=================================================================================================\n");
+	printf("S.No : Name \t\t\t: Phone.No \t\t\t: Email ID \t\t\t:\n");
+	printf("=================================================================================================\n");
 
+	//printf(":%15s: %15s: %15s:",address_book->list->name, address_book->list->phone_numbers, address_book->list->email_addresses);
+
+	while(fgets(buffer,40,address_book->fp)){
+		column=0;
+		row++;
+
+		if(row==1)
+			continue;
+		address_book->count= row-1;
+		printf("%d ", address_book->count);
+		char* value = strtok(buffer, ", ");
+
+		while(value){
+			// if(column==0)
+			// 	printf("Name: ");
+
+			// if(column==1)
+			// 	printf("Phone Number: ");
+
+			// if(column==2)
+			// 	printf("Email: ");
+
+			printf("%s\t", value);
+			value=strtok(NULL,", ");
+			column++;
+		}
+		printf("\n");
+
+		
+
+	}
+	
 	return e_success;
 }
 
@@ -58,12 +97,12 @@ void menu_header(const char *str)
 {
 	fflush(stdout);
 
-	system("cls");
+	//system("clear");
 
 	printf("#######  Address Book  #######\n");
-	if (str != '\0')
+	if (*str != '\0')
 	{
-		printf("#######  %s\n", str);
+		printf("#######  %s:\n", str);
 	}
 }
 
@@ -87,7 +126,6 @@ Status menu(AddressBook *address_book)
 	ContactInfo backup;
 	Status ret;
 	int option;
-	
 	// do
 	// {
 	// 	main_menu();
@@ -115,9 +153,10 @@ Status menu(AddressBook *address_book)
 	// 		case e_delete_contact:
 	// 			delete_contact(address_book);
 	// 			break;
-	// 		case e_list_contacts:
-	// 			break;
-	// 			/* Add your implementation to call list_contacts function here */
+			//case e_list_contacts:
+				list_contacts(address_book,"Fuck you",0,"Search Result",e_list);
+				//break;
+				/* Add your implementation to call list_contacts function here */
 	// 		case e_save:
 	// 			save_file(address_book);
 	// 			break;
