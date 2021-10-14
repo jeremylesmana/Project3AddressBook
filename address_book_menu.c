@@ -133,6 +133,8 @@ Status menu(AddressBook *address_book)
 
 Status add_contacts(AddressBook *address_book)
 {
+	ContactInfo cont;
+	int validate, checkPh = 0, checkEmail = 0;
 	int option;
 	do
 	{
@@ -143,31 +145,50 @@ Status add_contacts(AddressBook *address_book)
 		{
 		case 1:
 			printf("1. Name : ");
-			scanf("%s", address_book->list->name);
-			if (){}
-				//validate and add name
-				break;
+			scanf("\n%[^\n]s", address_book->list->name);
+			break;
+			
 		case 2:
 			printf("2. Phone No 1 : ");
 			scanf("%s", address_book->list->phone_numbers);
-			if(){}
-			//validate and add phone num
-				break;
 
-		case 3: 
+			if(checkPh == 1){
+				printf("invalid phone no\n");
+				return -1;
+			}
+
+			for (validate = 0; validate < strlen(cont.phone_numbers); validate++)
+			{
+				if ((strlen(cont.phone_numbers) < 10) || (cont.phone_numbers[validate] < '0') || (cont.phone_numbers[validate] > 9))
+				{
+					checkPh = 1;
+				}
+			}
+			break;
+
+		case 3:
 			printf("3. Email ID 1 : ");
 			scanf("%s", address_book->list->email_addresses);
-			if(){}
-			//validate and add email address
-		
+
+			if(checkEmail < 2){
+				printf("invalide email address\n");
+				return -1;
+			}
+			for (validate = 0; validate < strlen(cont.email_addresses); validate++)
+			{
+				if ((cont.email_addresses[validate] == '@') || (cont.email_addresses[validate] == '.'))
+				{
+					checkEmail++;
+				}
+			}
+			break;
+
 		case 0:
 			printf("0. Back");
 			break;
-
-		default:
-			break;
 		}
-	} while(option != e_exit);
+	} while (option != e_exit);
+
 	return e_success;
 }
 
