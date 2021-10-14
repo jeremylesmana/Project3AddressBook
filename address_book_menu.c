@@ -148,6 +148,34 @@ Status search_contact(AddressBook *address_book)
 Status edit_contact(AddressBook *address_book)
 {
 	/* Add the functionality for edit contacts here */
+	/*
+	we want to be able to grab input
+	we'll print out prompts based on the user's inputs that delve into sections
+	*/
+
+	/*
+	we first have to search what mode we want and that's 3 or edit contact so keep that in mind
+
+	we then have to specify how we'll identify the person; it can be name, phone number, email, or a serial number
+	- but there's also a back button to revert to a previous so implement like a while loop 
+
+	once the option is selected, you'll input the actual value 
+	- (i.e. 1 corresponds to name so the user types in the name of the person in a prompt after)
+
+	once that's done, we display the contact info in a huge graphic like in 5.17
+	- the graphic table prints out everyone with that same name
+	- if two people with the same name existed, they get listed out
+
+	then we ask for what serial number they are specifically so we can work on that specific contact
+
+	afterward, we can select what aspect of their contact we want to adjust with a number input again
+	- we prompt them twice asking what is the index of the item we want to change
+	- the other prompt asks what we want to adjust the item to
+
+	then it shows us an updated version of the contact we adjusted 
+
+	then pressing 0 or back will put us back on the menu like nothing changed while every other option would technically put us through the same loop
+	*/
 }
 
 Status delete_contact(AddressBook *address_book)
