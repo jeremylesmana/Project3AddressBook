@@ -164,11 +164,10 @@ Status search_contact(AddressBook *address_book)
 					printf("Enter the name: ");
 					scanf("%s", nameInput);
 
-					const ContactInfo endPtr = *address_book + tableSize;
-					for(; address_book < endPtr; address_book++) //search until end of table ptr++ will increment by one
+					for(int i = 0; i < address_book->count; i++) //search until end of table ptr++ will increment by one
 					{
-						if(address_book->name == nameInput)//check if it equals the employee number
-							return (ContactInfo) address_book;
+						if(strcmp(address_book->list[i]->name,nameInput))//check if it equals the employee number
+							printf(addressbook->list[i]->name + " " + address_book->list[i]->phone_numbers + " " + address_book->list[i]->address);
 					}
 					return e_no_match;
 		}
