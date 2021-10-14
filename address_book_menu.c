@@ -51,45 +51,46 @@ Status list_contacts(AddressBook *address_book, const char *title, int *index, c
 	 * The menu provide navigation option if the entries increase the page size
 	 */ 
 	char buffer[32];
-	int row=0, column = 0;
+	int row=index, column = 0;
 	menu_header(title);
-	
-	printf("=================================================================================================\n");
-	printf("S.No : Name \t\t\t: Phone.No \t\t\t: Email ID \t\t\t:\n");
-	printf("=================================================================================================\n");
-
-	//printf(":%15s: %15s: %15s:",address_book->list->name, address_book->list->phone_numbers, address_book->list->email_addresses);
+	printf("=============================================================================================================\n");
+	printf(":S.No : Name \t\t\t\t: Phone.No \t\t\t  : Email ID \t\t\t    :\n");
+	printf("=============================================================================================================\n");
 
 	while(fgets(buffer,40,address_book->fp)){
 		column=0;
 		row++;
-
+		
 		if(row==1)
 			continue;
-		address_book->count= row-1;
-		printf("%d ", address_book->count);
+		printf(": %d   :", row-1);
 		char* value = strtok(buffer, ", ");
 
 		while(value){
-			// if(column==0)
-			// 	printf("Name: ");
+			if(column==0)
+				printf(" %-32s:", value);
 
-			// if(column==1)
-			// 	printf("Phone Number: ");
+			if(column==1)
+				printf(" %-32s:", value);
 
-			// if(column==2)
-			// 	printf("Email: ");
+			if(column==2){
+				//if(row<temp){
+					value[strlen(value)-1]='\0';
+				//}
+				printf(" %-32s:\n", value);
+			}
 
-			printf("%s\t", value);
 			value=strtok(NULL,", ");
+
 			column++;
 		}
-		printf("\n");
-
-		
-
+		printf("=============================================================================================================\n");
 	}
-	
+	int *test = row-1;
+	printf("there are %d people in your book", test);
+
+	fclose(address_book->fp);
+
 	return e_success;
 }
 
@@ -154,11 +155,12 @@ Status menu(AddressBook *address_book)
 	// 			delete_contact(address_book);
 	// 			break;
 			//case e_list_contacts:
-				list_contacts(address_book,"Fuck you",0,"Search Result",e_list);
+				list_contacts(address_book,"Contact List",0,"Search Result",e_list);
+				save_file(address_book);
 				//break;
 				/* Add your implementation to call list_contacts function here */
 	// 		case e_save:
-	// 			save_file(address_book);
+	 			
 	// 			break;
 	// 		case e_exit:
 	// 			break;

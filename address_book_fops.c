@@ -40,7 +40,6 @@ Status load_file(AddressBook *address_book)
 		while(fgets(buffer,40,address_book->fp)){
 			column=0;
 			row++;
-
 			if(row==1)
 				continue;
 
@@ -60,14 +59,7 @@ Status load_file(AddressBook *address_book)
 				column++;
 			}
 			address_book->count = row-1;
-			//printf("index: %d, name: %s, phone: %s email: %s", address_book->count, address_book->list->name, address_book->list->phone_numbers, address_book->list->email_addresses);
-			//printf("\n");
-
 		}
-		/* 
-		 * Do the neccessary step to open the file
-		 * Do error handling
-		 */
 	}
 	else{
 		address_book->fp = fopen(DEFAULT_FILE,"w");
@@ -79,14 +71,22 @@ Status load_file(AddressBook *address_book)
 
 Status save_file(AddressBook *address_book)
 {
-	address_book= malloc(sizeof(AddressBook));
+	char buffer[32];
 	/*
 	 * Write contacts back to file.
 	 * Re write the complete file currently
 	 */ 
 
+	address_book->fp = fopen(DEFAULT_FILE, "w");
+	
+	while(fgets(buffer,40,address_book->fp)){
+		fprintf(address_book->fp,"hello%s,%s,%s\n", address_book->list->name,address_book->list->phone_numbers,address_book->list->email_addresses);
+	}
+
+
 	if (address_book->fp == NULL)
 	{
+		printf("Saving failed");
 		return e_fail;
 	}
 
