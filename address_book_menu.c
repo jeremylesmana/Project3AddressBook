@@ -161,7 +161,7 @@ Status edit_contact(AddressBook *address_book)
 	int serialSelector;
 	char qzSelector;
 	
-	menu_header("Search contact by: \n"); //update the menu name to how the pdf wants it
+	menu_header("Search contact to Edit by: \n"); //update the menu name to how the pdf wants it
 	printf("0. Back\n");
 	printf("1. Name\n");
 	printf("2. Phone No\n");
@@ -184,6 +184,11 @@ Status edit_contact(AddressBook *address_book)
 		for(; address_book < endPtr; address_book++){
 			if(strcmp(address_book->list->name, tempStringInput) == 0){
 				/*
+				once that's done, we display the contact info in a huge graphic like in 5.17
+				- the graphic table prints out everyone with that same name
+				- if two people with the same name existed, they get listed out
+
+				menu_header("Search Result: \n");
 				list_contacts(address_book, "Contact List", 0, "Search Result", e_edit); //MODES, not features for edit contact
 				printf("\nPress: [s] = Select. [q] | Cancel: s\n");
 				scanf("%s", qzSelector);
@@ -203,24 +208,80 @@ Status edit_contact(AddressBook *address_book)
 		}
 	}
 	else if(searchChoice == 2){
-		printf("Enter the Phone No: \n");
+		printf("Enter Phone Number: \n");
 		scanf("%s", &tempStringInput);
+		for(; address_book < endPtr; address_book++){
+			if(strcmp(address_book->list->phone_numbers, tempStringInput) == 0){
+				/*
+				menu_header("Search Result: \n");
+				list_contacts(address_book, "Contact List", 0, "Search Result", e_edit); //MODES, not features for edit contact
+				printf("\nPress: [s] = Select. [q] | Cancel: s\n");
+				scanf("%s", qzSelector);
+				if(selector == "q"){
+					return e_back;
+				}
+				if(selector != "s"){ //this cannot be reached if q is typed in the selection
+					return e_no_match;
+				}
+				printf("Select a Serial Number (S.No) to Edit: ")
+				scanf("%d", serialSelector)
+				*/
+				printf("\nEnter Phone No to be changed: %s", &tempStringInput);
+				scanf("%s", &tempStringInput);
+				strcpy(address_book->list->phone_numbers, tempStringInput);
+			}
+		}
 	}
 	else if(searchChoice == 3){
 		printf("Enter the Email ID: \n");
 		scanf("%s", &tempStringInput);
+		for(; address_book < endPtr; address_book++){
+			if(strcmp(address_book->list->email_addresses, tempStringInput) == 0){
+				/*
+				menu_header("Search Result: \n");
+				list_contacts(address_book, "Contact List", 0, "Search Result", e_edit); //MODES, not features for edit contact
+				printf("\nPress: [s] = Select. [q] | Cancel: s\n");
+				scanf("%s", qzSelector);
+				if(selector == "q"){
+					return e_back;
+				}
+				if(selector != "s"){ //this cannot be reached if q is typed in the selection
+					return e_no_match;
+				}
+				printf("Select a Serial Number (S.No) to Edit: ")
+				scanf("%d", serialSelector)
+				*/
+				printf("\nEnter Email ID to be changed: %s", &tempStringInput);
+				scanf("%s", &tempStringInput);
+				strcpy(address_book->list->email_addresses, tempStringInput);
+			}
+		}
 	}
 	else if(searchChoice == 4){
 		printf("Enter the Serial No: \n");
-		scanf("%s", &tempStringInput);
+		scanf("%d", &tempSerial);
+		for(; address_book < endPtr; address_book++){
+			if(address_book->list->si_no == tempSerial){
+				/*
+				menu_header("Search Result: \n");
+				list_contacts(address_book, "Contact List", 0, "Search Result", e_edit); //MODES, not features for edit contact
+				printf("\nPress: [s] = Select. [q] | Cancel: s\n");
+				scanf("%s", qzSelector);
+				if(selector == "q"){
+					return e_back;
+				}
+				if(selector != "s"){ //this cannot be reached if q is typed in the selection
+					return e_no_match;
+				}
+				printf("Select a Serial Number (S.No) to Edit: ")
+				scanf("%d", serialSelector)
+				*/
+				printf("\nEnter Serial No to be changed: %d", &finalSerial);
+				scanf("%d", &finalSerial);
+				address_book->list->si_no = finalSerial;
+			}
+		}
 	}
-/*
-	once that's done, we display the contact info in a huge graphic like in 5.17
-	- the graphic table prints out everyone with that same name
-	- if two people with the same name existed, they get listed out
-*/
-
-
 
 /*
 	then we ask for what serial number they are specifically so we can work on that specific contact
