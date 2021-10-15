@@ -9,10 +9,22 @@
 
 int get_option(int type, const char *msg)
 {
-	int tempOption;
+	int *temp;
+	char temp2;
 	printf("%s",msg);
-	scanf("%d", &tempOption);
-	return tempOption;
+	if(type==1){
+		scanf(" %d",&temp);
+		//getch();
+		printf("Test");
+		return temp;
+	}
+	if(type==2){
+		temp2 = getch();
+		if (temp == 'Y')
+			return 0;
+		else
+			return 1;
+	}
 }
 
 Status save_prompt(AddressBook *address_book)
@@ -48,7 +60,7 @@ Status list_contacts(AddressBook *address_book, const char *title, int *index, c
 	 */ 
 	char buffer[32];
 	int row=index, column = 0;
-	menu_header(title);
+	//menu_header(title);
 	printf("=============================================================================================================\n");
 	printf(":S.No : Name \t\t\t\t: Phone.No \t\t\t  : Email ID \t\t\t    :\n");
 	printf("=============================================================================================================\n");
@@ -94,7 +106,7 @@ void menu_header(const char *str)
 {
 	fflush(stdout);
 
-	system("clear");
+	//system("clear");
 
 	printf("#######  Address Book  #######\n");
 	if (str != '\0')
@@ -123,12 +135,12 @@ Status menu(AddressBook *address_book)
 	ContactInfo backup;
 	Status ret;
 	int option;
-
 	do
 	{
 		main_menu();
 
-		option = get_option(NUM, "Enter something:");
+		get_option(NUM,"");
+		printf("Test");
 
 		if ((address_book->count == 0) && (option != e_add_contact))
 		{
@@ -151,6 +163,7 @@ Status menu(AddressBook *address_book)
 			delete_contact(address_book);
 			break;
 		case e_list_contacts:
+			list_contacts(address_book,"Search Result:",0,"",e_list);
 			break;
 			/* Add your implementation to call list_contacts function here */
 		case e_save:
@@ -234,7 +247,7 @@ Status search(const char *str, AddressBook *address_book, int loop_count, int fi
 Status search_contact(AddressBook *address_book)
 {
 	int selection;
-	int serialInput;
+	int serialInput=0;
 	char *nameInput[32];
 	char *phoneInput[32];
 	char *emailInput[32];
