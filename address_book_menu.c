@@ -154,8 +154,8 @@ Status edit_contact(AddressBook *address_book)
 	int addressBookSize = address_book->count; //variables to help us deal with searching later on
 	const AddressBook *endPtr = address_book + addressBookSize;
 	int searchChoice;
-	int tempStringInput[32];
-	int finalStringInput[32];
+	char tempStringInput[32];
+	char finalStringInput[32];
 	int tempSerial;
 	int finalSerial;
 	int serialSelector;
