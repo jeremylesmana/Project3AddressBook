@@ -152,19 +152,19 @@ Status menu(AddressBook *address_book)
 		switch (option)
 		{
 		case e_add_contact:
-			add_contacts(&address_book);
+			add_contacts(address_book);
 			break;
 		case e_search_contact:
-			search_contact(&address_book);
+			search_contact(address_book);
 			break;
 		case e_edit_contact:
-			edit_contact(&address_book);
+			edit_contact(address_book);
 			break;
 		case e_delete_contact:
-			delete_contact(&address_book);
+			delete_contact(address_book);
 			break;
 		case e_list_contacts:
-			list_contacts(&address_book,"Search Result:",0,"",e_list);
+			list_contacts(address_book,"Search Result:",0,"",e_list);
 			break;
 			/* Add your implementation to call list_contacts function here */
 		case e_save:
@@ -336,7 +336,6 @@ Status edit_contact(AddressBook *address_book)
 	we'll print out prompts based on the user's inputs that delve into sections
 	we first have to search what mode we want from the main menu and that's 3 or edit contact so keep that in mind
 	*/
-<<<<<<< HEAD
 	int addressBookSize = address_book->count; //variables to help us deal with searching later on
 	const AddressBook *endPtr = address_book + addressBookSize;
 	int searchChoice;
@@ -348,18 +347,11 @@ Status edit_contact(AddressBook *address_book)
 	char qzSelector;
 	
 	menu_header("Search contact to Edit by: \n"); //update the menu name to how the pdf wants it
-=======
-
-	char tempStringInput[32];
-	
-	menu_header("Search contact by: \n"); //update the menu name
->>>>>>> f083a75c88e1678717e4de79fccfca9c0776e368
 	printf("0. Back\n");
 	printf("1. Name\n");
 	printf("2. Phone No\n");
 	printf("3. Email ID\n");
 	printf("4. Serial No\n");
-<<<<<<< HEAD
 	printf("\nPlease select an option: ");
 	/*
 	we then have to specify how we'll identify the person; it can be name, phone number, email, or a serial number
@@ -479,26 +471,6 @@ Status edit_contact(AddressBook *address_book)
 /*
 	then we ask for what serial number they are specifically so we can work on that specific contact
 
-=======
-	/*
-	we then have to specify how we'll identify the person; it can be name, phone number, email, or a serial number
-	- but there's also a back button to revert to a previous so implement like a while loop 
-*/
-	int searchChoice = scanf("%d");
-	if(searchChoice == 0){
-		return e_back;
-	}
-	else if(searchChoice == 1){
-		printf("Enter the Name: ");
-	}
-/*
-	once the option is selected, you'll input the actual value 
-	- (i.e. 1 corresponds to name so the user types in the name of the person in a prompt after)
-	once that's done, we display the contact info in a huge graphic like in 5.17
-	- the graphic table prints out everyone with that same name
-	- if two people with the same name existed, they get listed out
-	then we ask for what serial number they are specifically so we can work on that specific contact
->>>>>>> f083a75c88e1678717e4de79fccfca9c0776e368
 	afterward, we can select what aspect of their contact we want to adjust with a number input again
 	- we prompt them twice asking what is the position of the item we want to change
 		- this means that we can have two phone numbers for example if they specify a position value that is + 1 the original amount
