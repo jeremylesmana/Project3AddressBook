@@ -7,7 +7,6 @@ Delete Contact - Sinho
 List Contacts & Load File / Save File- Tak Yu */
 
 #include <stdio.h>
-#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
 
