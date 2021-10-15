@@ -1,5 +1,4 @@
 #include <stdio.h>
-//#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
@@ -152,35 +151,78 @@ Status edit_contact(AddressBook *address_book)
 	we'll print out prompts based on the user's inputs that delve into sections
 	we first have to search what mode we want from the main menu and that's 3 or edit contact so keep that in mind
 	*/
-
-	char tempStringInput[32];
+	int addressBookSize = address_book->count; //variables to help us deal with searching later on
+	const AddressBook *endPtr = address_book + addressBookSize;
+	int searchChoice;
+	int tempStringInput[32];
+	int finalStringInput[32];
+	int tempSerial;
+	int finalSerial;
+	int serialSelector;
+	char qzSelector;
 	
-	menu_header("Search contact by: \n"); //update the menu name
+	menu_header("Search contact by: \n"); //update the menu name to how the pdf wants it
 	printf("0. Back\n");
 	printf("1. Name\n");
 	printf("2. Phone No\n");
 	printf("3. Email ID\n");
 	printf("4. Serial No\n");
+	printf("\nPlease select an option: ");
 	/*
-
 	we then have to specify how we'll identify the person; it can be name, phone number, email, or a serial number
 	- but there's also a back button to revert to a previous so implement like a while loop 
-*/
-	int searchChoice = scanf("%d");
-	if(searchChoice == 0){
-		return e_back;
-	}
-	else if(searchChoice == 1){
-		printf("Enter the Name: ")
-	}
-/*
 	once the option is selected, you'll input the actual value 
 	- (i.e. 1 corresponds to name so the user types in the name of the person in a prompt after)
-
+	*/
+	scanf("%d", &searchChoice);
+	if(searchChoice == 0){
+		main_menu();
+	}
+	else if(searchChoice == 1){
+		printf("Enter the Name: \n");
+		scanf("%s", &tempStringInput);
+		for(; address_book < endPtr; address_book++){
+			if(strcmp(address_book->list->name, tempStringInput) == 0){
+				/*
+				list_contacts(address_book, "Contact List", 0, "Search Result", e_edit); //MODES, not features for edit contact
+				printf("\nPress: [s] = Select. [q] | Cancel: s\n");
+				scanf("%s", qzSelector);
+				if(selector == "q"){
+					return e_back;
+				}
+				if(selector != "s"){ //this cannot be reached if q is typed in the selection
+					return e_no_match;
+				}
+				printf("Select a Serial Number (S.No) to Edit: ")
+				scanf("%d", serialSelector)
+				*/
+				printf("\nEnter Name to be changed: %s", &tempStringInput);
+				scanf("%s", &tempStringInput);
+				strcpy(address_book->list->name, tempStringInput);
+			}
+		}
+	}
+	else if(searchChoice == 2){
+		printf("Enter the Phone No: \n");
+		scanf("%s", &tempStringInput);
+	}
+	else if(searchChoice == 3){
+		printf("Enter the Email ID: \n");
+		scanf("%s", &tempStringInput);
+	}
+	else if(searchChoice == 4){
+		printf("Enter the Serial No: \n");
+		scanf("%s", &tempStringInput);
+	}
+/*
 	once that's done, we display the contact info in a huge graphic like in 5.17
 	- the graphic table prints out everyone with that same name
 	- if two people with the same name existed, they get listed out
+*/
 
+
+
+/*
 	then we ask for what serial number they are specifically so we can work on that specific contact
 
 	afterward, we can select what aspect of their contact we want to adjust with a number input again
