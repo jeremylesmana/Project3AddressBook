@@ -1,5 +1,4 @@
 /*Here's how the work was split:
-
 Add Contact & Menu - Erica
 Search Contact- Jeremy
 Edit Contact- Andrew
