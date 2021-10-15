@@ -34,30 +34,32 @@ Status load_file(AddressBook *address_book)
       	perror("Error printed by perror");
       	fprintf(stderr, "Error opening file: %s\n", strerror( errnum ));
 
-		char buffer[32];
+		char buffer[300];
 		int row=0, column = 0;
-		while(fgets(buffer,40,address_book->fp)){
+		while(fgets(buffer,300,address_book->fp)){
 			column=0;
 			row++;
 			if(row==1)
 				continue;
 
 			char* value = strtok(buffer, ", ");
+			
 			while(value){
-				if(column==0)
-					strcpy(address_book->list->name,value);
+                if(column==0)
+                    strcpy(address_book->list[row-1].name,value);
 
-				if(column==1)
-					strcpy(address_book->list->phone_numbers,value);
+                if(column==1)
+                    strcpy(address_book->list[row-1].phone_numbers,value);
 
-				if(column==2)
-					strcpy(address_book->list->email_addresses,value);
+                if(column==2)
+                    strcpy(address_book->list[row-1].email_addresses,value);
 
-				value=strtok(NULL,", ");
-				column++;
-			}
-			address_book->count = row-1;
+                value=strtok(NULL,", ");
+                column++;
+            }
 		}
+		address_book->count = row-1;
+		
 		fclose(address_book->fp);
 	}
 	else{
