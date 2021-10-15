@@ -15,7 +15,7 @@ Status load_file(AddressBook *address_book)
 	int ret=0;
 	int errnum;
 	address_book->fp=fopen(DEFAULT_FILE,"r+");
-	address_book= malloc(sizeof(AddressBook)*10);
+	address_book = malloc(sizeof(AddressBook)*10);
 
 	/* 
 	 * Check for file existance
@@ -23,7 +23,7 @@ Status load_file(AddressBook *address_book)
 	if(!(address_book->fp=fopen(DEFAULT_FILE,"r"))){
 		ret=1;
 		printf("address_book.csv does not exist, creating new csv file");
-		fclose(address_book->fp);
+		fclose(&address_book->fp);
 		
 	}
 
@@ -46,21 +46,19 @@ Status load_file(AddressBook *address_book)
 			
 			while(value){
                 if(column==0)
-                    strcpy(address_book->list[row-1].name,value);
-
+                    strcpy(&address_book->list[row-1].name[0],value);
                 if(column==1)
-                    strcpy(address_book->list[row-1].phone_numbers,value);
-
+                    strcpy(&address_book->list[row-1].phone_numbers[0],value);
                 if(column==2)
-                    strcpy(address_book->list[row-1].email_addresses,value);
-
+                    strcpy(&address_book->list[row-1].email_addresses[0],value);
                 value=strtok(NULL,", ");
                 column++;
             }
 		}
-		address_book->count = row-1;
-		
-		fclose(address_book->fp);
+		address_book->count = row - 1;
+		fclose(&address_book->fp);
+
+		printf("%d %s",address_book->count,address_book->list[1].name);
 	}
 	else{
 		address_book->fp = fopen(DEFAULT_FILE,"w");
