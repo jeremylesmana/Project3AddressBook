@@ -7,7 +7,6 @@ Delete Contact - Sinho
 List Contacts & Load File / Save File- Tak Yu */
 
 #include <stdio.h>
-//#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -22,12 +21,12 @@ int main(void)
 
 	/* Load the file from .csv file if any */
 	ret = load_file(&address_book);
-
+	
 	if (ret == e_success)
 	{
 		/* Show all the available menu */
 		ret = menu(&address_book);
-		//list_contacts(&address_book,"");
+
 		if (ret == e_success)
 		{
 			/* Save the entries */
