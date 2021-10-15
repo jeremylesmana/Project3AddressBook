@@ -7,7 +7,6 @@ Delete Contact - Sinho
 List Contacts & Load File / Save File- Tak Yu */
 
 #include <stdio.h>
-#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -18,10 +17,10 @@ List Contacts & Load File / Save File- Tak Yu */
 int main(void)
 {
 	AddressBook address_book;
-	Status ret;
+	Status ret = -8;
 
 	/* Load the file from .csv file if any */
-	ret = load_file(&address_book);
+	//ret = load_file(&address_book);
 
 	if (ret == e_success)
 	{
@@ -31,7 +30,7 @@ int main(void)
 		if (ret == e_success)
 		{
 			/* Save the entries */
-			save_prompt(&address_book);
+			//save_prompt(&address_book);
 		}
 	}
 
