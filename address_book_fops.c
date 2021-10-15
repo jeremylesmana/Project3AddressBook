@@ -58,7 +58,7 @@ Status load_file(AddressBook *address_book)
 				value=strtok(NULL,", ");
 				column++;
 			}
-			address_book->count = row-1;
+			printf("%s",address_book->list->name);
 		}
 	}
 	else{
@@ -79,9 +79,8 @@ Status save_file(AddressBook *address_book)
 
 	address_book->fp = fopen(DEFAULT_FILE, "w");
 	
-	while(fgets(buffer,40,address_book->fp)){
-		fprintf(address_book->fp,"hello%s,%s,%s\n", address_book->list->name,address_book->list->phone_numbers,address_book->list->email_addresses);
-	}
+	fprintf(address_book->fp,"hello\n");
+
 
 
 	if (address_book->fp == NULL)

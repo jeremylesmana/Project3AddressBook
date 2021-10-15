@@ -156,11 +156,10 @@ Status menu(AddressBook *address_book)
 	// 			break;
 			//case e_list_contacts:
 				list_contacts(address_book,"Contact List",0,"Search Result",e_list);
-				save_file(address_book);
 				//break;
 				/* Add your implementation to call list_contacts function here */
 	// 		case e_save:
-	 			
+	 			save_file(address_book);
 	// 			break;
 	// 		case e_exit:
 	// 			break;
