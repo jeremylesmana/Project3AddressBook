@@ -1,9 +1,12 @@
 /*Here's how the work was split:
-Add Contact & Menu - Erica
-Search Contact- Jeremy
-Edit Contact- Andrew
-Delete Contact - Sinho
-List Contacts & Load File / Save File- Tak Yu */
+
+Jeremy Lesmana - Search Contact & Delete
+Takyu - List & File Operation & Delete
+Andrew - Edit Contact & Debugging
+Erica - Menu & Add Contact
+Sinho - Research
+
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
