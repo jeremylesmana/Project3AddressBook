@@ -45,20 +45,25 @@ Status load_file(AddressBook *address_book)
 			char* value = strtok(buffer, ", ");
 			while(value){
 				if(column==0)
-					strcpy(address_book->list->name,value);
+					strcpy(address_book->list[row].name,value);
 
 				if(column==1)
-					strcpy(address_book->list->phone_numbers,value);
+					strcpy(address_book->list[row].phone_numbers,value);
 
 				if(column==2)
-					strcpy(address_book->list->email_addresses,value);
+					strcpy(address_book->list[row].email_addresses,value);
 
 				value=strtok(NULL,", ");
 				column++;
 			}
-			address_book->count = row-1;
 		}
+		
+		address_book->count = row-1;
+		//printf("count: %d",address_book->count);
+		
+		
 		fclose(address_book->fp);
+		
 	}
 	else{
 		address_book->fp = fopen(DEFAULT_FILE,"w");

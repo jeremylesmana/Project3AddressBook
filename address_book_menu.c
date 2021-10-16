@@ -14,8 +14,6 @@ int get_option(int type, const char *msg)
 	printf("%s",msg);
 	if(type==1){
 		scanf(" %d",&temp);
-		//getch();
-		printf("Test");
 		return temp;
 	}
 	if(type==2){
@@ -34,7 +32,7 @@ Status save_prompt(AddressBook *address_book)
 	do
 	{
 		main_menu();
-
+		
 		option = get_option(CHAR, "\rEnter 'N' to Ignore and 'Y' to Save: ");
 
 		if (option == 'Y')
@@ -60,11 +58,13 @@ Status list_contacts(AddressBook *address_book, const char *title, int *index, c
 	 */ 
 	char buffer[32];
 	int row=index, column = 0;
-	//menu_header(title);
+	int max = address_book->count;
+	menu_header(title);
 	printf("=============================================================================================================\n");
 	printf(":S.No : Name \t\t\t\t: Phone.No \t\t\t  : Email ID \t\t\t    :\n");
 	printf("=============================================================================================================\n");
-
+	printf("hello");
+	
 	while(fgets(buffer,40,address_book->fp)){
 		column=0;
 		row++;
@@ -131,16 +131,18 @@ void main_menu(void)
 }
 
 Status menu(AddressBook *address_book)
-{
+{	
 	ContactInfo backup;
 	Status ret;
 	int option;
+		
+	printf("%s",address_book->list[0].name[0]);
+	
 	do
 	{
 		main_menu();
 
-		get_option(NUM,"");
-		printf("Test");
+		option = get_option(NUM,"");
 
 		if ((address_book->count == 0) && (option != e_add_contact))
 		{
@@ -148,6 +150,7 @@ Status menu(AddressBook *address_book)
 			continue;
 		}
 
+		
 		switch (option)
 		{
 		case e_add_contact:
@@ -179,6 +182,7 @@ Status menu(AddressBook *address_book)
 
 Status add_contacts(AddressBook *address_book)
 {
+
 	ContactInfo cont;
 	int validate, checkPh = 0, checkEmail = 0;
 	int option;
