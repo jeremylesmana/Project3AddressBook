@@ -67,7 +67,7 @@ Status list_contacts(AddressBook *address_book, const char *title, int *index, c
 			temp[strlen(temp)-1]='\0';
 			printf("\n:%-5d:%-32s:%-32s:%-32s:", address_book->list[i].si_no, address_book->list[i].name[0], address_book->list[i].phone_numbers[0], address_book->list[i].email_addresses[0]);
 			printf("\n==========================================================================================================\n");
-			strncat(address_book->list[i].email_addresses[0], "\n",address_book->list[i].email_addresses);
+			strncat(address_book->list[i].email_addresses[0], "\n",address_book->list[i].email_addresses[0]);
 		}
 		option = get_option(CHAR,"Enter Q to exit: ");
 	}while(option != 'Q');
@@ -81,7 +81,7 @@ void menu_header(const char *str)
 	system("cls");
 
 	printf("#######  Address Book  #######\n");
-	if (str != '\0')
+	if (str != '0')
 	{
 		printf("#######  %s\n", str);
 	}
@@ -222,7 +222,10 @@ Status search_contact(AddressBook *address_book)
 	char nameInput[32];
 	char phoneInput[32];
 	char emailInput[32];
+	char randomKey[10];
+	char* temp;
 	do {
+		search_top:
 		menu_header("Search Contact by:");
 		printf("0. Back\n");
 		printf("1. Name\n");
@@ -246,15 +249,23 @@ Status search_contact(AddressBook *address_book)
 				
 				for(int i = 0; i <= address_book->count; i++) 
 				{
-					if(strcmp(address_book->list[i].name[0],nameInput) == 0){
+					if(strcmp(address_book->list[i].name[0], nameInput) == 0){
 						found = 1;
 						printf("\n:%5d%32s%32s%32s", address_book->list[i].si_no, address_book->list[i].name[0], address_book->list[i].phone_numbers[0], address_book->list[i].email_addresses[0]);
 						printf("\n================================================================================================================================");
 					}
 				}
-				if(found == 0)
+				if(found == 0) {
 					printf("\nNo entries found with name %s\n\n", nameInput);
-				break;
+					printf("\nPress any key to continue: ");
+					scanf("%s", randomKey);
+					goto search_top;
+				}
+				else {
+					printf("\nPress any key to continue: ");
+					scanf("%s", randomKey);
+					goto search_top;
+				}
 			case 2:
 				printf("Enter the phone number: ");
 				scanf("%s", phoneInput);
@@ -264,33 +275,53 @@ Status search_contact(AddressBook *address_book)
 				
 				for(int i = 0; i <= address_book->count; i++) 
 				{
-					if(strcmp(address_book->list[i].phone_numbers[0],phoneInput) == 0){
+					if(strcmp(address_book->list[i].phone_numbers[0], phoneInput) == 0){
 						found = 1;
 						printf("\n:%5d:%32s:%32s:%32s:", address_book->list[i].si_no, address_book->list[i].name[0], address_book->list[i].phone_numbers[0], address_book->list[i].email_addresses[0]);
 						printf("\n================================================================================================================================\n");
 					}
 				}
-				if(found == 0)
-					printf("\nNo entries found with phone number %s\n\n", phoneInput);
-				break;
+				if(found == 0) {
+					printf("\nNo entries found with name %s\n\n", phoneInput);
+					printf("\nPress any key to continue: ");
+					scanf("%s", randomKey);
+					goto search_top;
+				}
+				else {
+					printf("\nPress any key to continue: ");
+					scanf("%s", randomKey);
+					goto search_top;
+				}
 			case 3:
 				printf("Enter the email address: ");
 				scanf("%s", emailInput);
 				menu_header("Search Result:");
+				
 				printf("\n================================================================================================================================");
 				printf("\n:%5s:%32s:%32s:%32s:\n","S. No","Name","Phone Number","Email Address");
 				
 				for(int i = 0; i <= address_book->count; i++) 
 				{
-					if(strcmp(address_book->list[i].email_addresses[0],emailInput) == 0){
+					temp = address_book->list[i].email_addresses[0];
+					temp[strlen(temp)-1]='\0';
+					if(strcmp(address_book->list[i].email_addresses[0], emailInput) == 0){
 						found = 1;
 						printf("\n:%5d:%32s:%32s:%32s:", address_book->list[i].si_no, address_book->list[i].name[0], address_book->list[i].phone_numbers[0], address_book->list[i].email_addresses[0]);
 						printf("\n================================================================================================================================\n");
-					}
+					}		
+					strncat(address_book->list[i].email_addresses[0], "\n",address_book->list[i].email_addresses[0]);
 				}
-				if(found == 0)
-					printf("\nNo entries found with email %s\n\n", emailInput);
-				break;
+				if(found == 0) {
+					printf("\nNo entries found with email address %s\n\n", emailInput);
+					printf("\nPress any key to continue: ");
+					scanf("%s", randomKey);
+					goto search_top;
+				}
+				else {
+					printf("\nPress any key to continue: ");
+					scanf("%s", randomKey);
+					goto search_top;
+				}
 			case 4:
 				printf("Enter the serial number: ");
 				scanf("%d", &serialInput);
@@ -306,9 +337,17 @@ Status search_contact(AddressBook *address_book)
 						printf("\n================================================================================================================================\n");
 					}
 				}
-				if(found == 0)
+				if(found == 0) {
 					printf("\nNo entries found with serial number %d\n\n", serialInput);
-				break;	
+					printf("\nPress any key to continue: ");
+					scanf("%s", randomKey);
+					goto search_top;
+				}
+				else {
+					printf("\nPress any key to continue: ");
+					scanf("%s", randomKey);
+					goto search_top;
+				}
 		}
 		printf("\nTotal number of contacts: %d\n",address_book->count);
 

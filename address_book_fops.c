@@ -6,7 +6,7 @@
 #include <errno.h>
 #include <ctype.h>
 
-extern int errno ;
+extern int errno;
 
 #include "address_book.h"
 
@@ -78,7 +78,7 @@ Status save_file(AddressBook *address_book)
 
 	address_book->fp = fopen(DEFAULT_FILE, "w");
 	
-	fprintf(address_book->fp,"name,phone number,email");
+	fprintf(address_book->fp,"name,phone number,email\n");
 
 	for(int i = 1; i<=address_book->count; i++)
 	{
