@@ -59,7 +59,7 @@ Status load_file(AddressBook *address_book)
 		address_book->count = row - 1;
 		fclose(address_book->fp);
 
-		printf("From address book fops:%d %s",address_book->count,address_book->list[1].name);
+		//printf("From address book fops:%d %s",address_book->count,address_book->list[1].name);
 	}
 	else{
 		address_book->fp = fopen(DEFAULT_FILE,"w");
@@ -78,11 +78,12 @@ Status save_file(AddressBook *address_book)
 
 	address_book->fp = fopen(DEFAULT_FILE, "w");
 	
-	while(fgets(buffer,40,address_book->fp)){
-		fprintf(address_book->fp,"hello%s,%s,%s\n", address_book->list->name,address_book->list->phone_numbers,address_book->list->email_addresses);
+	fprintf(address_book->fp,"name,phone number,email");
+
+	for(int i = 1; i<=address_book->count; i++)
+	{
+		fprintf(address_book->fp, "%s,%s,%s",address_book->list[i].name[0],address_book->list[i].phone_numbers[0],address_book->list[i].email_addresses[0]);
 	}
-
-
 	if (address_book->fp == NULL)
 	{
 		printf("Saving failed");

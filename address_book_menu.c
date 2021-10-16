@@ -15,15 +15,14 @@ int get_option(int type, const char *msg)
 
 	if(type==1){
 		scanf("%d",&temp);
-		//getch();
 		return temp;
 	}
 	if(type==2){
-		temp2 = getch();
-		if (temp == 'Y')
-			return 0;
+		scanf(" %c", &temp2);
+		if (temp2 == 'Y')
+			return temp2;
 		else
-			return 1;
+			return temp2;
 	}
 }
 
@@ -53,14 +52,25 @@ Status save_prompt(AddressBook *address_book)
 
 Status list_contacts(AddressBook *address_book, const char *title, int *index, const char *msg, Modes mode)
 {
-	menu_header("List Contact Result:");
-	printf("\n================================================================================================================================");
-	printf("\n:%5s:%32s:%32s:%32s:\n","S. No","Name","Phone Number","Email Address");
-	for(int i = 1; i <= address_book->count; i++) 
-	{
-			printf("\n:%5d:%32s:%32s:%32s:", address_book->list[i].si_no, address_book->list[i].name[0], address_book->list[i].phone_numbers[0], address_book->list[i].email_addresses[0]);
-			printf("\n================================================================================================================================\n");
-	}
+	char* temp;
+	char value = '\n';
+	char option;
+	do{
+		menu_header("List Contact Result:");
+		printf("\n==========================================================================================================\n");
+		printf(":%-5s:%-32s:%-32s:%-32s:","S. No","Name","Phone Number","Email Address");
+		printf("\n==========================================================================================================\n");
+		for(int i = 1; i <= address_book->count; i++) 
+		{
+
+			temp = address_book->list[i].email_addresses[0];
+			temp[strlen(temp)-1]='\0';
+			printf("\n:%-5d:%-32s:%-32s:%-32s:", address_book->list[i].si_no, address_book->list[i].name[0], address_book->list[i].phone_numbers[0], address_book->list[i].email_addresses[0]);
+			printf("\n==========================================================================================================\n");
+			strncat(address_book->list[i].email_addresses[0], "\n",address_book->list[i].email_addresses);
+		}
+		option = get_option(CHAR,"Enter Q to exit: ");
+	}while(option != 'Q');
 	return e_success;
 }
 
@@ -68,7 +78,7 @@ void menu_header(const char *str)
 {
 	fflush(stdout);
 
-	//system("clear");
+	system("cls");
 
 	printf("#######  Address Book  #######\n");
 	if (str != '\0')
