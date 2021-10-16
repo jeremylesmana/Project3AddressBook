@@ -1,5 +1,4 @@
 /*Here's how the work was split:
-
 Add Contact & Menu - Erica
 Search Contact- Jeremy
 Edit Contact- Andrew
@@ -21,16 +20,15 @@ int main(void)
 
 	/* Load the file from .csv file if any */
 	ret = load_file(&address_book);
-
 	if (ret == e_success)
 	{
 		/* Show all the available menu */
 		ret = menu(&address_book);
-
+		
 		if (ret == e_success)
 		{
 			/* Save the entries */
-			save_prompt(&address_book);
+			//save_prompt(&address_book);
 		}
 	}
 
